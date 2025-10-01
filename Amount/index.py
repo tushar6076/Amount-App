@@ -563,6 +563,7 @@ class AccountDetailsApp(MDApp):
             self.dialog.dismiss()
         if self.dialog_box:
             self.dialog_box.dismiss()
+            self.dialog_box = None
 
     def send_email(self):
         if not self.dialog_box:
