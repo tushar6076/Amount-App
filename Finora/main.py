@@ -4,7 +4,6 @@ from kivy.utils import platform
 from kivy.lang.builder import Builder
 from kivy.clock import Clock
 from threading import Thread
-from kivy.metrics import dp
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.tab import MDTabs, MDTabsBase
@@ -13,10 +12,6 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
-#from kivymd.color_definitions import palette
-#from kivymd.color_definitions import colors
-#from kivymd.uix.chip import MDChip
-#import shutil
 import sqlite3
 from datetime import date
 from home import HomeScreen
@@ -27,8 +22,6 @@ from settings import SettingsScreen
 from plyer import filechooser
 from xlsxwriter import Workbook
 import os
-#from io import BytesIO
-#import platform
 if platform == 'android':
     from android import activity
     from android.permissions import check_permission, request_permissions, Permission
@@ -142,26 +135,6 @@ class FinoraApp(MDApp):
                 if "top_app_bar" in screen.ids:
                     screen.ids.top_app_bar.md_bg_color = (0.94, 0.94, 0.94, 1)
             self.screen_manager.get_screen('home').ids.tabs.tab_bar.md_bg_color = (0.94, 0.94, 0.94, 1)
-    '''def load_colors(self):
-        for color in palette:
-            hex_color = colors[color]['500']
-            if self.theme_cls.primary_palette == color:
-                self.screen_manager.get_screen('settings').ids.theme_color_layout.add_widget(
-                MDChip(
-                    text = color,
-                    md_bg_color = colors[color]['50'],
-                    elevation = 4,
-                    on_release = self.select_theme_color
-                )
-            )
-            else:
-                self.screen_manager.get_screen('settings').ids.theme_color_layout.add_widget(
-                    MDChip(
-                        text = color,
-                        md_bg_color = hex_color,
-                        on_release = self.select_theme_color
-                    )
-                )
 
     def write_data(self, data):
         file_obj = open("settings.txt", "w+")
@@ -193,21 +166,6 @@ class FinoraApp(MDApp):
         with open("settings.txt", "w+") as file_obj:
             file_obj.write(self.theme_cls.theme_style)
             file_obj.close()
-        '''data = f"{self.theme_cls.theme_style}\n{self.theme_cls.primary_palette}"
-        self.write_data(data)
-
-    def select_theme_color(self, chip):
-        for child in self.screen_manager.get_screen("settings").ids.theme_color_layout.children:
-            if child.text == chip.text:
-                self.theme_cls.primary_palette = chip.text
-                child.md_bg_color = colors[child.text]['50']
-                child.elevation = 4
-                
-            else:
-                child.md_bg_color = colors[child.text]['500']
-                child.elevation = 0
-        data = f"{self.theme_cls.theme_style}\n{self.theme_cls.primary_palette}"
-        self.write_data(data)'''
 
     def on_resume(self):
         """Called automatically when app resumes (after settings)"""
@@ -241,8 +199,7 @@ class FinoraApp(MDApp):
                 intent.setData(uri)
                 activity.startActivity(intent)
 
-    def build_xlsx(self, xlsx_file):
-        file_path = os.path.join(os.getcwd(), xlsx_file)
+    def build_xlsx(self, file_path):
         self.conn = sqlite3.connect("account_details.db")
         self.cursor = self.conn.cursor()
         self.cursor.execute("SELECT * FROM entries ORDER BY transaction_date DESC")
@@ -344,7 +301,6 @@ class FinoraApp(MDApp):
 
         worksheet.autofit()
         workbook.close()
-        return file_path
     
     def android_notify(self, title, message):
         activity = PythonActivity.mActivity
@@ -433,8 +389,9 @@ class FinoraApp(MDApp):
                     print("takePersistableUriPermission failed:", e)
 
                 # Build file on disk (you already create it in build_xlsx)
-                xlsx_file = 'data.xlsx'
-                file_path = self.build_xlsx(xlsx_file=xlsx_file)
+                xlsx_file = f'{date.today().strftime("%B_%Y")}.xlsx'
+                file_path = os.path.join(os.getcwd(), xlsx_file)
+                self.build_xlsx(file_path)
                 if not os.path.exists(file_path):
                     print("File not found:", file_path)
                     return
@@ -558,10 +515,11 @@ class FinoraApp(MDApp):
             if not file_path:
                 return
             file_path = file_path[0] if isinstance(file_path, list) else file_path
-            self.build_xlsx(file_path)
+            file_path = self.build_xlsx(file_path)
 
         else:
-            file_path = f'{os.getcwd()}/data.xlsx'
+            xlsx_file = f'{date.today().strftime("%B_%Y")}.xlsx'
+            file_path = os.path.join(os.getcwd(), xlsx_file)
             self.build_xlsx(file_path)
 
         if not self.dialog:
