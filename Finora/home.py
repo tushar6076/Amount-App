@@ -85,7 +85,7 @@ class HomeScreen(MDScreen):
                              transition="in_quart", 
                              )
             anim.start(self.search_input)
-            self.top_app_bar.title = "Account Details"
+            self.top_app_bar.title = "Transactions"
             self.search_input.text = ""
             self.search_bar_active = False
 
