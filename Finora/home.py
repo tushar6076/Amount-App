@@ -80,6 +80,7 @@ class HomeScreen(MDScreen):
             anim.start(self.search_input)
             self.top_app_bar.title = ""
             self.search_input.readonly = False
+            self.search_input.focus = True
             self.search_bar_active = True
         else:
             anim = Animation(opacity=0, duration=0.5, 
