@@ -107,3 +107,4 @@ class ViewEntryScreen(MDScreen):
     def dismiss_dialog(self, instance):
         if self.delete_dialog:
             self.delete_dialog.dismiss()
+            self.delete_dialog = None
