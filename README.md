@@ -35,11 +35,11 @@ Whether it’s personal records or financial data, Finora helps you **store, org
 
 | Home Page | Navigation Drawer | Settings |
 |-----------|-----------------|---------|
-| ![Home Page](homepage.jpeg) | ![Navigation Drawer](navigation_drawer.jpeg) | ![Settings](settings_page.jpeg) |
+| ![Home Page](screenshots/homepage.jpeg) | ![Navigation Drawer](screenshots/navigation_drawer.jpeg) | ![Settings](screenshots/settings_page.jpeg) |
 
 | Add Entry | Export Dialog |
 |-----------|---------------|
-| ![Add Entry](add_entrypage.jpeg) | ![Export Dialog](export_mail_dialog.jpeg) |
+| ![Add Entry](screenshots/add_entrypage.jpeg) | ![Export Dialog](screenshots/export_mail_dialog.jpeg) |
 
 ---
 
