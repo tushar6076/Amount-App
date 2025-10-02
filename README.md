@@ -1,2 +1,1 @@
-# Amount-App
-Keep it Private
+# Finora
