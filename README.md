@@ -45,11 +45,7 @@ Whether it’s personal records or financial data, Finora helps you **store, org
 
 ## 🎥 Demo Video
 
-👉 Watch Finora in action:  
-
-[![Watch the demo](screenshots/demo-thumbnail.jpeg)](https://github.com/your-username/finora/assets/demo.mp4)  
-
-*(Replace with your actual video link: GitHub Assets, YouTube, or `.mp4` in repo)*  
+<video src="https://github.com/tushar6076/Finora/demo.mp4" controls width="600"></video>
 
 ---
 
