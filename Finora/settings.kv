@@ -1,0 +1,141 @@
+<SettingsScreen>:
+    name: "settings"
+    MDScreen:
+        MDTopAppBar:
+            id: top_app_bar
+            title: "Settings"
+            #md_bg_color: app.theme_cls.primary_color
+            specific_text_color: app.theme_cls.accent_color
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.home_button(x)]]
+            
+        MDScrollView:
+            pos_hint: {"top": 0.9}
+            size_hint_y: 0.9
+            MDList:
+                padding: "16dp"
+                spacing: dp(5)
+                size_hint_y: None
+                adaptive_height: True
+
+                # Example Extra Section (Optional)
+                MDLabel:
+                    text: "General"
+                    theme_text_color: "Primary"
+                    font_style: "H6"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                MDCard:
+                    orientation: "horizontal"
+                    padding: "12dp"
+                    spacing: dp(20)
+                    radius: 12
+                    size_hint_y: None
+                    height: dp(70)
+                    ripple_behavior: True
+                    on_release: root.info()
+
+                    MDIcon:
+                        icon: "information-outline"
+                        theme_text_color: "Secondary"
+                        pos_hint: {"center_y": 0.5}
+                        size_hint_x: None
+                        adaptive_width: True
+
+                    MDLabel:
+                        text: "About App"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        valign: "center"
+                        size_hint_x: None
+                        adaptive_width: True
+
+                MDSeparator:
+                    height: "1dp"
+
+                MDLabel:
+                    text: "Appearance"
+                    theme_text_color: "Primary"
+                    font_style: "H6"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                MDCard:
+                    orientation: "horizontal"
+                    padding: "12dp"
+                    spacing: dp(20)
+                    radius: 12
+                    size_hint_y: None
+                    height: dp(70)
+                    ripple_behavior: True
+
+                    MDIcon:
+                        id: theme_icon
+                        icon: "lightbulb-outline"
+                        theme_text_color: "Secondary"
+                        pos_hint: {"center_y": 0.5}
+                        size_hint_x: None
+                        adaptive_width: True
+
+                    MDLabel:
+                        text: "Dark Mode"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        valign: "center"
+                        size_hint_x: None
+                        adaptive_width: True
+
+                    MDSwitch:
+                        id: theme_switch
+                        pos_hint: {"center_y": 0.3}
+                        size_hint_x: None
+                        adaptive_width: True
+                        on_active: app.change_theme_style(self.active)
+
+                MDSeparator:
+                    height: "1dp"
+
+                # =====================
+                # Notifications Section
+                # =====================
+                MDLabel:
+                    text: "Notifications"
+                    theme_text_color: "Primary"
+                    font_style: "H6"
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                MDCard:
+                    orientation: "horizontal"
+                    padding: "12dp"
+                    spacing: dp(20)
+                    radius: 12
+                    size_hint_y: None
+                    height: dp(70)
+                    ripple_behavior: True
+
+                    MDIcon:
+                        icon: "bell-outline"
+                        theme_text_color: "Secondary"
+                        pos_hint: {"center_y": 0.5}
+                        size_hint_x: None
+                        adaptive_width: True
+
+                    MDLabel:
+                        text: "Enable Notifications"
+                        theme_text_color: "Primary"
+                        halign: "left"
+                        valign: "center"
+                        size_hint_x: None
+                        adaptive_width: True
+
+                    MDSwitch:
+                        id: notification_switch
+                        pos_hint: {"center_y": 0.3}
+                        size_hint_x: None
+                        adaptive_width: True
+                        on_active: app.toggle_notifications(self)
+
+                MDSeparator:
+                    height: "1dp"

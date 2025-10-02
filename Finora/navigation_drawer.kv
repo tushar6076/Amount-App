@@ -1,0 +1,105 @@
+<Mail_Content>
+    orientation: "vertical"
+    spacing: "10dp"
+    size_hint_y: None
+    height: "120dp"
+    MDTextField:
+        id: email
+        hint_text: "Enter your email adress"
+        helper_text: "Example: abc@gmail.com"
+        input_type: "mail"
+        #validator: "email"
+        mode: "rectangle"
+        on_text: app.update_text(self, self.text)
+        on_focus: app.update(self)
+        on_text_validate:
+            app.progress()
+            #app.email(self)
+    MDSpinner:
+        id: spinner
+        size_hint: None, None
+        size: dp(50), dp(50)
+        pos_hint: {"center_x": 0.5, "center_y": 1}
+        active: False  # Initially inactive
+        palette: [[1, 0, 0, 1],[0, 1, 0, 1],[0, 0, 1, 1]]
+    MDBoxLayout:
+        pos_hint: {'center_x': 0.8, 'center_y': 0.1}
+        spacing: dp(10)
+        MDFlatButton:
+            text: "CANCEL"
+            theme_text_color: "Custom"
+            on_release: app.dismiss_dialog(self)
+        MDRaisedButton:
+            text: "EMAIL"
+            md_bg_color: 0, 0.5, 0.5, 1
+            theme_text_color: "Custom"
+            on_release:
+                app.progress()
+                #app.email(self)
+
+<Navigation_Drawer@BoxLayout>:
+    name: "nav_drawer"
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+    swipe_edge_with: root.width/4
+    swipe_distance: root.width/1000
+
+    ScrollView:
+        MDList:
+            padding: dp(5)
+            spacing: dp(15)
+            size_hint_y: None
+            height: self.minimum_height
+            pos_hint: {"top": 0.92}
+            OneLineIconListItem:
+                text: "Home"
+                on_release:
+                    app.root.current = "home"
+                    app.root.get_screen('home').ids.nav_drawer.set_state("close")
+                IconLeftWidget:
+                    icon: "home"
+            OneLineIconListItem:
+                text: "Add Entry"
+                on_release:
+                    app.root.current = "add_entry"
+                    app.root.get_screen('home').ids.nav_drawer.set_state("close")
+                IconLeftWidget:
+                    icon: "plus"
+            OneLineIconListItem:
+                text: "Export"
+                on_release:
+                    app.pick_folder()
+                    app.root.get_screen('home').ids.nav_drawer.set_state("close")
+                IconLeftWidget:
+                    icon: "export"
+            OneLineIconListItem:
+                text: "Email"
+                on_release:
+                    app.send_email()
+                    app.root.get_screen('home').ids.nav_drawer.set_state("close")
+                IconLeftWidget:
+                    icon: "email"
+            OneLineIconListItem:
+                text: "Settings"
+                on_release:
+                    app.load_permission()
+                    app.root.current = "settings"
+                    app.root.get_screen('home').ids.nav_drawer.set_state("close")
+                IconLeftWidget:
+                    icon: "cog"
+
+    MDCard:
+        size_hint_y: None
+        height: self.minimum_height + dp(20)
+        padding: dp(10)
+        ripple_behavior: True
+        BoxLayout:
+            orientation: "vertical"
+            valign: "middle"
+            MDLabel:
+                text: "Developed by HackSmiths"
+                font_style: "Caption"
+                size_hint_y: None
+                font_size: "16sp"
+                height: self.texture_size[1]
