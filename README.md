@@ -31,6 +31,12 @@ Whether it’s personal records or financial data, Finora helps you **store, org
 
 ---
 
+## 🎥 Demo Video
+
+<video src="https://github.com/tushar6076/Finora/demo.mp4" controls width="600"></video>
+
+---
+
 ## 📸 Screenshots
 
 | Home Page | Navigation Drawer | Settings |
@@ -40,12 +46,6 @@ Whether it’s personal records or financial data, Finora helps you **store, org
 | Add Entry | Export Dialog |
 |-----------|---------------|
 | ![Add Entry](screenshots/add_entrypage.jpeg) | ![Export Dialog](screenshots/export_mail_dialog.jpeg) |
-
----
-
-## 🎥 Demo Video
-
-<video src="https://github.com/tushar6076/Finora/demo.mp4" controls width="600"></video>
 
 ---
 
