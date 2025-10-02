@@ -79,6 +79,7 @@ class HomeScreen(MDScreen):
             anim = Animation(opacity=1, duration=1, transition="out_quart")
             anim.start(self.search_input)
             self.top_app_bar.title = ""
+            self.search_input.readonly = False
             self.search_bar_active = True
         else:
             anim = Animation(opacity=0, duration=0.5, 
@@ -87,6 +88,7 @@ class HomeScreen(MDScreen):
             anim.start(self.search_input)
             self.top_app_bar.title = "Transactions"
             self.search_input.text = ""
+            self.search_input.readonly = True
             self.search_bar_active = False
 
     def search(self, instance, text):
